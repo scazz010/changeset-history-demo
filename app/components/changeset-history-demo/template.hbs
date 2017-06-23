@@ -1,11 +1,13 @@
+
 <form class="form-horizontal">
   <h1 class="page-header">
     Ember-Changeset-History demo
     <button class="btn btn-primary" {{action "undo"}} disabled={{if (not canUndo) "disabled"}}>UNDO</button>
     <button class="btn btn-primary" {{action "redo"}} disabled={{if (not canRedo) "disabled"}}>REDO</button>
   </h1>
-
-
+  <div class="bs-callout bs-callout-info">
+    Checkout the code for this demo at <a href="https://scazz010.github.io/changeset-history-demo">https://scazz010.github.io/changeset-history-demo</a>
+  </div>
 
   <div class="form-group">
     <h3>Deboucing mutations:</h3>
