@@ -10,6 +10,24 @@
   </div>
 
   <div class="form-group">
+    <h3>Working with valdations:</h3>
+
+    <p>Ember-changeset-history works in exactly the same way as ember changeset. The errors on a changeset are stored with the change, so undo-ing a change to an invalid state also loads the error</p>
+
+    <div class="bs-example">
+    {{#validated-field
+      type="text"
+      changeset=changeset
+      property="firstName"
+    }}
+      {{#debounced-value property=(get changeset 'firstName') as |debouncer|}}
+        <input class="form-control" value={{changeset.firstName}} oninput={{action debouncer value="target.value"}}>
+      {{/debounced-value}}
+    {{/validated-field}}
+    </div>
+  </div>
+
+  <div class="form-group">
     <h3>Deboucing mutations:</h3>
 
     <p>Mutations for onInput will store a state per change - which is annoying for text inputs. Ember-changeset-history ships with a component to debounce input values easily - it's a small wrapper around ember-concurrency.</p>
@@ -48,7 +66,6 @@
         property="description"
       }}
         {{#debounced-value
-          property=(get changeset "description")
           propertyPath="changeset.description"
           onChange=(action "customSetter")
         as |debouncer|}}
@@ -62,7 +79,6 @@
         <pre>
           <code class="language-html" data-lang="html">
       \{{#debounced-value
-          property=(get changeset "description")
           propertyPath="changeset.description"
           onChange=(action "customSetter")
           as |debouncer|
